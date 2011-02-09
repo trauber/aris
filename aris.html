@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>ris 2 authotkey ares item insert javascript</title>
+    <script src='https://github.com/janl/mustache.js/raw/master/mustache.js' type='text/javascript'></script>
+    <script type='text/javascript'>
+      //<![CDATA[
+        function convert() {
+          var authors = [];
+          var view = [];
+          var tastring = document.forms.daform.ws.value;
+          document.forms.daform.ws.value = '';
+          var mysplit = tastring.split('\n');
+          for(i=0; i < mysplit.length; i++) {
+            var label = mysplit[i].substring(0,2);
+            var field = mysplit[i].substring(6);
+            if (label == "TY") { view.type = field; }
+            if (label == "A1" || label == "AU") { authors.push(field); }
+            if (label == "T1" || label == "TI") { view.title = field; }
+            if (label == "JF") { view.journal = field; }
+            if (label == "JO") { view.jour = field; }
+            if (label == "SP") { view.sp = field; }
+            if (label == "EP") { view.ep = field; }
+            if (label == "VL") { view.vl = field; }
+            if (label == "IS") { view.is = field; }
+            if (label == "DO") { view.doi = field; }
+            if (label == "SN") { view.sn = field; }
+            if (label == "UR") { view.url = field; }
+            if (label == "ID") { view.oclc = field; }
+            if (label == "DB") { view.db = field; }
+            if (label == "PB") { view.pb = field; }
+            if (label == "CY") { view.city = field; }
+            if (label == "Y1" || label == "YR" || label == "PY") { view.ymd = field }
+          }
+          var ymdsplit = view.ymd.split("/");
+          var months = {
+            "01": "January",
+            "02": "February",
+            "03": "March",
+            "04": "April",
+            "05": "May",
+            "06": "June",
+            "07": "July",
+            "08": "August",
+            "09": "September",
+            "10": "October",
+            "11": "November",
+            "12": "December"
+          }
+          var partials = {
+            "year": ymdsplit[0],
+            "month": months[ymdsplit[1]],
+            "auth": authors[0].replace(",",", "),
+            "auth": authors[0].replace("  "," ")
+          }
+          var jtemplate = "SendInput {Raw}{{journal}}\n"+
+            "SendInput {tab}{Raw}{{vl}}\n"+
+            "SendInput {tab}{Raw}{{is}}\n"+
+            "SendInput {tab}{Raw}{{>month}}\n"+
+            "SendInput {tab}{Raw}{{>year}}\n"+
+            "SendInput {tab}{Raw}{{sp}}-{{ep}}\n"+
+            "SendInput {tab}{Raw}{{title}}\n"+
+            "SendInput {tab}{Raw}{{>auth}}\n"+
+            "SendInput {tab 8}{Space}\n"+
+            "SendInput {tab 7}{Raw}Not a loan\n"+
+            "SendInput {tab}{Raw}Web Page Link\n"+
+            "SendInput {tab}{Raw}Article\n"+
+            "SendInput {tab}{Raw}Factual\n"+
+            "SendInput {tab}{Raw}{{url}}\n"+
+            "SendInput {tab 3}{Raw}{{sn}}\n"+
+            "SendInput {tab}{Raw}\n"+
+            "SendInput {tab 2}{Raw}\n";
+          var btemplate = "SendInput {Raw}{{title}}\n"+
+            "SendInput {tab}{Raw}{{>auth}}\n"+
+            "SendInput {tab 2}{Raw}\n"+
+            "SendInput {tab}{Raw}{{pb}}\n"+
+            "SendInput {tab}{Raw}{{>year}}\n"+
+            "SendInput {tab}{Raw}{{city}}\n"+
+            "SendInput {tab}{Raw}\n"+
+            "SendInput {tab 13}{Raw}Not a loan\n"+
+            "SendInput {tab}{Raw}Web Page Link\n"+
+            "SendInput {tab}{Raw}Book\n"+
+            "SendInput {tab}{Raw}Factual\n"+
+            "SendInput {tab}{Raw}{{url}}\n"+
+            "SendInput {tab 3}{Raw}{{sn}}\n"+
+            "SendInput {tab 2}{Raw}{{oclc}}\n"+
+            "SendInput {tab}{Raw}\n";
+          document.forms.daform.ws.value = "IfWinExist Item\n{\n  WinActivate\n}\nelse\n{\n  Exit\n}\n";
+          if (view.type == "JOUR") { document.forms.daform.ws.value += Mustache.to_html(jtemplate, view, partials); }
+          else if (view.type == "BOOK") { document.forms.daform.ws.value += Mustache.to_html(btemplate, view, partials); }
+          else { document.forms.daform.ws.value += "UNRECOGNIZED RECORD TYPE"; }
+        }
+      //]]>
+    </script>
+  </head>
+  <body>
+    <h1>ris 2 authotkey ares item insert javascript</h1>
+    <form name='daform'>
+      <textarea cols='80' name='ws' rows='30' wrap='off'></textarea>
+      <br />
+      <br />
+      <input onClick='convert();' type='button' value='convert RIS to AutoHotkey' />
+    </form>
+  </body>
+</html>
