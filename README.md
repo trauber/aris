@@ -13,7 +13,7 @@ Aris produces two types of AutoHotkey for RIS with type BOOK or JOUR.
 BOOK is for Ares's mongraph template and JOUR for the serial.
 
 
-[Ares]: http://www-sys.com/products/ares/
-[AutoHotkey]: http://www.autohotkey
+[Ares]: http://www.atlas-sys.com/products/ares/
+[AutoHotkey]: http://www.autohotkey.com
 [mustache.js]: https://github.com/janl/mustache.js
 [RIS]: http://en.wikipedia.org/wiki/RIS_(file_format)
