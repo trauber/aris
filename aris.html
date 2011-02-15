@@ -30,7 +30,7 @@
             if (label == "DB") { view.db = field; }
             if (label == "PB") { view.pb = field; }
             if (label == "CY") { view.city = field; }
-            if (label == "Y1" || label == "YR" || label == "PY") { view.ymd = field }
+            if (label == "Y1" || label == "YR" || label == "PY") { view.ymd = field.replace(/-/g,"/"); }
           }
           var ymdsplit = view.ymd.split("/");
           var months = {
