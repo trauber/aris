@@ -8,30 +8,82 @@
         function convert() {
           var authors = [];
           var view = [];
+          //var mysplit = [];
           var tastring = document.forms.daform.ws.value;
           document.forms.daform.ws.value = '';
-          var mysplit = tastring.split('\n');
+          mysplit = tastring.split('\n');
           for(i=0; i < mysplit.length; i++) {
             var label = mysplit[i].substring(0,2);
             var field = mysplit[i].substring(6);
-            if (label == "TY") { view.type = field; }
-            if (label == "A1" || label == "AU") { authors.push(field); }
-            if (label == "T1" || label == "TI") { view.title = field; }
-            if (label == "JF") { view.journal = field; }
-            if (label == "JO") { view.jour = field; }
-            if (label == "SP") { view.sp = field; }
-            if (label == "EP") { view.ep = field; }
-            if (label == "VL") { view.vl = field; }
-            if (label == "IS") { view.is = field; }
-            if (label == "DO") { view.doi = field; }
-            if (label == "SN") { view.sn = field; }
-            if (label == "UR") { view.url = field; }
-            if (label == "ID") { view.oclc = field; }
-            if (label == "DB") { view.db = field; }
-            if (label == "PB") { view.pb = field; }
-            if (label == "CY") { view.city = field; }
-            if (label == "Y1" || label == "YR" || label == "PY") { view.ymd = field.replace(/-/g,"/"); }
+            switch(label) {
+            case  "TY":
+              view.type = field;
+              break;
+            case "A1":
+              view.auth = field;
+              authors.push(view.auth);
+              break;
+            case "AU":
+              view.auth = field;
+              authors.push(view.auth);
+              break;
+            case "T1":
+              view.title = field;
+              break;
+            case "TI":
+              view.title = field;
+              break;
+            case "JF":
+              view.journal = field;
+              break;
+            case "JO":
+              view.jour = field;
+              break;
+            case "SP":
+              view.sp = field;
+              break;
+            case "EP":
+              view.ep = field;
+            case "VL":
+              view.vl = field;
+              break;
+            case "IS":
+              view.is = field;
+              break;
+            case "DO":
+              view.doi = field;
+              break;
+            case "SN":
+              view.sn = field;
+              break;
+            case "UR":
+              view.url = field;
+              break;
+            case "ID":
+              view.oclc = field;
+              break;
+            case "DB":
+              view.db = field;
+              break;
+            case "PB":
+              view.pb = field;
+              break;
+            case "CY":
+              view.city = field;
+              break;
+            case "Y1":
+              view.ymd = field.replace(/-/g,"/");
+              break;
+            case "YR": 
+              view.ymd = field.replace(/-/g,"/");
+              break;
+            case "PY":
+              view.ymd = field.replace(/-/g,"/");
+              break;
+        
+            }
           }
+          var ymdsplit = [];
           var ymdsplit = view.ymd.split("/");
           var months = {
             "01": "January",
