@@ -15,7 +15,7 @@ BOOK is for Ares's mongraph template and JOUR for the serial.
 
 ## Step by Step Usage
 
-1. Go to the home page for [Aris][].
+1. Go to the home page for [Aris][] (https://github.com/trauber/aris).
 1. Click the `Downloads` icon over on the right side of the page.
 1. Download the `.zip` archive.
 1. Right mouse click on the `.zip` archive.
