@@ -17,67 +17,89 @@
           switch(label) {
           case  "TY":
             view.type = field;
+            alert(field);
             break;
           case "A1":
             view.auth = field;
+            alert(field);
             authors.push(view.auth);
             break;
           case "AU":
             view.auth = field;
+            alert(field);
             authors.push(view.auth);
             break;
           case "T1":
             view.title = field;
+            alert(field);
             break;
           case "TI":
             view.title = field;
+            alert(field);
             break;
           case "JF":
             view.journal = field;
+            alert(field);
             break;
           case "JO":
             view.jour = field;
+            alert(field);
             break;
           case "SP":
             view.sp = field;
+            alert(field);
             break;
           case "EP":
             view.ep = field;
+            alert(field);
+            break;
           case "VL":
             view.vl = field;
+            alert(field);
             break;
           case "IS":
             view.is = field;
+            alert(field);
             break;
           case "DO":
             view.doi = field;
+            alert(field);
             break;
           case "SN":
             view.sn = field;
+            alert(field);
             break;
           case "UR":
             view.url = field;
+            alert(field);
             break;
           case "ID":
             view.oclc = field;
+            alert(field);
             break;
           case "DB":
             view.db = field;
+            alert(field);
             break;
           case "PB":
             view.pb = field;
             break;
+            alert(field);
           case "CY":
             view.city = field;
+            alert(field);
             break;
           case "Y1":
             view.ymd = field.replace(/-/g,"/");
+            alert(field);
             break;
           case "YR": 
             view.ymd = field.replace(/-/g,"/");
+            alert(field);
             break;
           case "PY":
             view.ymd = field.replace(/-/g,"/");
+            alert(field);
             break;
 
           }
@@ -85,6 +107,7 @@
         var ymdsplit = [];
         var ymdsplit = view.ymd.split("/");
         var months = {
+          "": " ",
           "01": "January",
           "02": "February",
           "03": "March",
