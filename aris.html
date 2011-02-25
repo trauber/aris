@@ -6,9 +6,8 @@
     <script type='text/javascript'>
       //<![CDATA[
         function convert() {
-          var authors = [];
           var view = [];
-          //var mysplit = [];
+          view.ymd = "///";
           var tastring = document.forms.daform.ws.value;
           document.forms.daform.ws.value = '';
           mysplit = tastring.split('\n');
@@ -18,91 +17,67 @@
             switch(label) {
             case  "TY":
               view.type = field;
-              alert(field);
               break;
             case "A1":
-              view.auth = field;
-              alert(field);
-              authors.push(view.auth);
+              if (view.auth) { break; } else { view.auth = field; } 
               break;
             case "AU":
-              view.auth = field;
-              alert(field);
-              authors.push(view.auth);
+              if (view.auth) { break; } else { view.auth = field; } 
               break;
             case "T1":
               view.title = field;
-              alert(field);
               break;
             case "TI":
               view.title = field;
-              alert(field);
               break;
             case "JF":
               view.journal = field;
-              alert(field);
               break;
             case "JO":
-              view.jour = field;
-              alert(field);
+              if (view.journal) { break; } else { view.journal = field; }
               break;
             case "SP":
               view.sp = field;
-              alert(field);
               break;
             case "EP":
               view.ep = field;
-              alert(field);
               break;
             case "VL":
               view.vl = field;
-              alert(field);
               break;
             case "IS":
               view.is = field;
-              alert(field);
               break;
             case "DO":
               view.doi = field;
-              alert(field);
               break;
             case "SN":
               view.sn = field;
-              alert(field);
               break;
             case "UR":
               view.url = field;
-              alert(field);
               break;
             case "ID":
               view.oclc = field;
-              alert(field);
               break;
             case "DB":
               view.db = field;
-              alert(field);
               break;
             case "PB":
               view.pb = field;
               break;
-              alert(field);
             case "CY":
               view.city = field;
-              alert(field);
               break;
             case "Y1":
               view.ymd = field.replace(/-/g,"/");
-              alert(field);
               break;
             case "YR": 
               view.ymd = field.replace(/-/g,"/");
-              alert(field);
               break;
             case "PY":
               view.ymd = field.replace(/-/g,"/");
-              alert(field);
               break;
-        
             }
           }
           var ymdsplit = [];
@@ -122,20 +97,16 @@
             "11": "November",
             "12": "December"
           }
-          var partials = {
-            "year": ymdsplit[0],
-            "month": months[ymdsplit[1]],
-            "auth": authors[0].replace(",",", "),
-            "auth": authors[0].replace("  "," ")
-          }
+          view.year =  ymdsplit[0];
+          view.month  =  months[ymdsplit[1]];
           var jtemplate = "SendInput {Raw}{{journal}}\n"+
             "SendInput {tab}{Raw}{{vl}}\n"+
             "SendInput {tab}{Raw}{{is}}\n"+
-            "SendInput {tab}{Raw}{{>month}}\n"+
-            "SendInput {tab}{Raw}{{>year}}\n"+
+            "SendInput {tab}{Raw}{{month}}\n"+
+            "SendInput {tab}{Raw}{{year}}\n"+
             "SendInput {tab}{Raw}{{sp}}-{{ep}}\n"+
             "SendInput {tab}{Raw}{{title}}\n"+
-            "SendInput {tab}{Raw}{{>auth}}\n"+
+            "SendInput {tab}{Raw}{{auth}}\n"+
             "SendInput {tab 8}{Space}\n"+
             "SendInput {tab 7}{Raw}Not a loan\n"+
             "SendInput {tab}{Raw}Web Page Link\n"+
@@ -146,10 +117,10 @@
             "SendInput {tab}{Raw}\n"+
             "SendInput {tab 2}{Raw}\n";
           var btemplate = "SendInput {Raw}{{title}}\n"+
-            "SendInput {tab}{Raw}{{>auth}}\n"+
+            "SendInput {tab}{Raw}{{auth}}\n"+
             "SendInput {tab 2}{Raw}\n"+
             "SendInput {tab}{Raw}{{pb}}\n"+
-            "SendInput {tab}{Raw}{{>year}}\n"+
+            "SendInput {tab}{Raw}{{year}}\n"+
             "SendInput {tab}{Raw}{{city}}\n"+
             "SendInput {tab}{Raw}\n"+
             "SendInput {tab 13}{Raw}24 Hours\n"+
@@ -161,8 +132,8 @@
             "SendInput {tab 2}{Raw}{{oclc}}\n"+
             "SendInput {tab}{Raw}\n";
           document.forms.daform.ws.value = "IfWinExist Item\n{\n  WinActivate\n}\nelse\n{\n  Exit\n}\n";
-          if (view.type == "JOUR") { document.forms.daform.ws.value += Mustache.to_html(jtemplate, view, partials); }
-          else if (view.type == "BOOK") { document.forms.daform.ws.value += Mustache.to_html(btemplate, view, partials); }
+          if (view.type == "JOUR") { document.forms.daform.ws.value += Mustache.to_html(jtemplate, view); }
+          else if (view.type == "BOOK") { document.forms.daform.ws.value += Mustache.to_html(btemplate, view); }
           else { document.forms.daform.ws.value += "UNRECOGNIZED RECORD TYPE"; }
         }
       //]]>
