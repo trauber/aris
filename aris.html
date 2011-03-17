@@ -15,126 +15,79 @@
             var label = mysplit[i].substring(0,2);
             var field = mysplit[i].substring(6);
             switch(label) {
-            case  "TY":
-              view.type = field;
-              break;
-            case "A1":
-              if (view.auth) { break; } else { view.auth = field; } 
-              break;
-            case "AU":
-              if (view.auth) { break; } else { view.auth = field; } 
-              break;
-            case "T1":
-              view.title = field;
-              break;
-            case "TI":
-              view.title = field;
-              break;
-            case "JF":
-              view.journal = field;
-              break;
-            case "JO":
-              if (view.journal) { break; } else { view.journal = field; }
-              break;
-            case "SP":
-              view.sp = field;
-              break;
-            case "EP":
-              view.ep = field;
-              break;
-            case "VL":
-              view.vl = field;
-              break;
-            case "IS":
-              view.is = field;
-              break;
-            case "DO":
-              view.doi = field;
-              break;
-            case "SN":
-              view.sn = field;
-              break;
-            case "UR":
-              view.url = field;
-              break;
-            case "ID":
-              view.oclc = field;
-              break;
-            case "DB":
-              view.db = field;
-              break;
-            case "PB":
-              view.pb = field;
-              break;
-            case "CY":
-              view.city = field;
-              break;
-            case "Y1":
-              view.ymd = field.replace(/-/g,"/");
-              break;
-            case "YR": 
-              view.ymd = field.replace(/-/g,"/");
-              break;
-            case "PY":
-              view.ymd = field.replace(/-/g,"/");
-              break;
+              case  "TY": view.type = field; break;
+              case "A1": if (view.auth) { break; } else { view.auth = field; } break;
+              case "AU": if (view.auth) { break; } else { view.auth = field; } break;
+              case "T1": view.title = field; break;
+              case "TI": view.title = field; break;
+              case "JF": view.journal = field; break;
+              case "JO": if (view.journal) { break; } else { view.journal = field; } break;
+              case "SP": view.sp = field; break;
+              case "EP": view.ep = field; break;
+              case "VL": view.vl = field; break;
+              case "IS": view.is = field; break;
+              case "DO": view.doi = field; break;
+              case "SN": view.sn = field; break;
+              case "UR": view.url = field; break;
+              case "ID": view.oclc = field; break;
+              case "DB": view.db = field; break;
+              case "PB": view.pb = field; break;
+              case "CY": view.city = field; break;
+              case "Y1": view.ymd = field.replace(/-/g,"/"); break;
+              case "YR": view.ymd = field.replace(/-/g,"/"); break;
+              case "PY": view.ymd = field.replace(/-/g,"/"); break;
             }
           }
           var ymdsplit = [];
           var ymdsplit = view.ymd.split("/");
           var months = {
-            "": " ",
-            "01": "January",
-            "02": "February",
-            "03": "March",
-            "04": "April",
-            "05": "May",
-            "06": "June",
-            "07": "July",
-            "08": "August",
-            "09": "September",
-            "10": "October",
-            "11": "November",
-            "12": "December"
+            "": " ", "01": "January", "02": "February", "03": "March", "04": "April",
+            "05": "May", "06": "June", "07": "July", "08": "August", "09":
+            "September", "10": "October", "11": "November", "12": "December"
           }
           view.year =  ymdsplit[0];
           view.month  =  months[ymdsplit[1]];
-          var jtemplate = "SendInput {Raw}{{journal}}\n"+
-            "SendInput {tab}{Raw}{{vl}}\n"+
-            "SendInput {tab}{Raw}{{is}}\n"+
-            "SendInput {tab}{Raw}{{month}}\n"+
-            "SendInput {tab}{Raw}{{year}}\n"+
+          var jtemplate = "If WinExist Item\n{\n  WinActivate\n}\nelse\n{\n  Exit\n}\n"+
+            "SendInput {Raw}{{journal}}\n"+
+            "SendInput {tab}{Raw}{{{vl}}}\n"+
+            "SendInput {tab}{Raw}{{{is}}}\n"+
+            "SendInput {tab}{Raw}{{{month}}}\n"+
+            "SendInput {tab}{Raw}{{{year}}}\n"+
             "SendInput {tab}{Raw}{{sp}}-{{ep}}\n"+
-            "SendInput {tab}{Raw}{{title}}\n"+
-            "SendInput {tab}{Raw}{{auth}}\n"+
+            "SendInput {tab}{Raw}{{{title}}}\n"+
+            "SendInput {tab}{Raw}{{{auth}}}\n"+
             "SendInput {tab 8}{Space}\n"+
             "SendInput {tab 7}{Raw}Not a loan\n"+
             "SendInput {tab}{Raw}Web Page Link\n"+
             "SendInput {tab}{Raw}Article\n"+
             "SendInput {tab}{Raw}Factual\n"+
             "SendInput {tab}{Raw}{{{url}}}\n"+
-            "SendInput {tab 3}{Raw}{{sn}}\n"+
+            "SendInput {tab 3}{Raw}{{{sn}}}\n"+
             "SendInput {tab}{Raw}\n"+
             "SendInput {tab 2}{Raw}\n";
-          var btemplate = "SendInput {Raw}{{title}}\n"+
-            "SendInput {tab}{Raw}{{auth}}\n"+
+          var btemplate = "If WinExist Item\n{\n  WinActivate\n}\nelse\n{\n  Exit\n}\n"+
+            "SendInput {Raw}{{{title}}}\n"+
+            "SendInput {tab}{Raw}{{{auth}}}\n"+
             "SendInput {tab 2}{Raw}\n"+
-            "SendInput {tab}{Raw}{{pb}}\n"+
-            "SendInput {tab}{Raw}{{year}}\n"+
-            "SendInput {tab}{Raw}{{city}}\n"+
+            "SendInput {tab}{Raw}{{{pb}}}\n"+
+            "SendInput {tab}{Raw}{{{year}}}\n"+
+            "SendInput {tab}{Raw}{{{city}}}\n"+
             "SendInput {tab}{Raw}\n"+
             "SendInput {tab 13}{Raw}24 Hours\n"+
             "SendInput {tab}{Raw}Hard Copy Reserve Item\n"+
             "SendInput {tab}{Raw}Book\n"+
             "SendInput {tab}{Raw}\n"+
-            "SendInput {tab}{Raw}{{url}}\n"+
-            "SendInput {tab 3}{Raw}{{sn}}\n"+
-            "SendInput {tab 2}{Raw}{{oclc}}\n"+
+            "SendInput {tab}{Raw}{{{url}}}\n"+
+            "SendInput {tab 3}{Raw}{{{sn}}}\n"+
+            "SendInput {tab 2}{Raw}{{{oclc}}}\n"+
             "SendInput {tab}{Raw}\n";
-          document.forms.daform.ws.value = "IfWinExist Item\n{\n  WinActivate\n}\nelse\n{\n  Exit\n}\n";
-          if (view.type == "JOUR") { document.forms.daform.ws.value += Mustache.to_html(jtemplate, view); }
-          else if (view.type == "BOOK") { document.forms.daform.ws.value += Mustache.to_html(btemplate, view); }
-          else { document.forms.daform.ws.value += "UNRECOGNIZED RECORD TYPE"; }
+          if (view.type == "JOUR") {
+            document.forms.daform.ws.value += Mustache.to_html(jtemplate, view);
+          } else if (view.type == "BOOK") {
+            document.forms.daform.ws.value += Mustache.to_html(btemplate, view);
+          } else {
+            document.forms.daform.ws.value += "UNRECOGNIZED RECORD TYPE";
+          }
         }
       //]]>
     </script>
@@ -142,10 +95,10 @@
   <body>
     <h1>aris</h1>
     <form name='daform'>
+      <input onClick='convert();' type='button' value='Convert RIS to AutoHotkey for Ares template' />
+      <br />
+      <br />
       <textarea cols='80' name='ws' rows='30' wrap='off'></textarea>
-      <br />
-      <br />
-      <input onClick='convert();' type='button' value='convert RIS to AutoHotkey for Ares template' />
     </form>
   </body>
 </html>
