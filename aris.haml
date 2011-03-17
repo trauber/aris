@@ -46,7 +46,7 @@
         }
         view.year =  ymdsplit[0];
         view.month  =  months[ymdsplit[1]];
-        var jtemplate = "If WinExist Item\n{\n  WinActivate\n}\nelse\n{\n  Exit\n}\n"+
+        var jtemplate = "IfWinExist Item\n{\n  WinActivate\n}\nelse\n{\n  Exit\n}\n"+
           "SendInput {Raw}{{journal}}\n"+
           "SendInput {tab}{Raw}{{{vl}}}\n"+
           "SendInput {tab}{Raw}{{{is}}}\n"+
@@ -64,7 +64,7 @@
           "SendInput {tab 3}{Raw}{{{sn}}}\n"+
           "SendInput {tab}{Raw}\n"+
           "SendInput {tab 2}{Raw}\n";
-        var btemplate = "If WinExist Item\n{\n  WinActivate\n}\nelse\n{\n  Exit\n}\n"+
+        var btemplate = "IfWinExist Item\n{\n  WinActivate\n}\nelse\n{\n  Exit\n}\n"+
           "SendInput {Raw}{{{title}}}\n"+
           "SendInput {tab}{Raw}{{{auth}}}\n"+
           "SendInput {tab 2}{Raw}\n"+
