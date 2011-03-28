@@ -26,12 +26,11 @@ BOOK is for Ares's mongraph template and JOUR for the serial.
    browser should have javascript enabled.)
 2. "Export" (download) an RIS file from a database.  (Configure your
    browser to open `.ris` files in notepad.)
-3. Use `Ctrl-a` and `Ctrl-c` to copy the record in notepad.
+3. Use `Ctrl-a` and `Ctrl-x` to copy the RIS to the clipboard and remove it from notepad.
 4. Paste the record into aris's textarea with `Ctrl-v`.
 5. Click aris's `convert RIS to AutoHotkey` button.
-6. Use `Ctrl-a` and `Ctrl-c` to copy the AutoHotkey script.
-7. In notepad use `Ctrl-a` and `Ctrl-v` to replace the RIS record with
-    the AutoHotkey script.
+6. Use `Ctrl-a` and `Ctrl-x` to copy the AutoHotkey script to the clipboard and clear aris.
+7. In notepad use `Ctrl-v` to place the AutoHotkey script in notepad.
 8. In notepad save the file with a `.ahk` extension. (Again, your
     desktop is the best place.)
 9. Open the add item button in Ares, select your template.
