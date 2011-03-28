@@ -47,7 +47,7 @@
         view.year =  ymdsplit[0];
         view.month  =  months[ymdsplit[1]];
         var jtemplate = "IfWinExist Item\n{\n  WinActivate\n}\nelse\n{\n  Exit\n}\n"+
-          "SendInput {Raw}{{journal}}\n"+
+          "SendInput {Raw}{{{journal}}}\n"+
           "SendInput {tab}{Raw}{{{vl}}}\n"+
           "SendInput {tab}{Raw}{{{is}}}\n"+
           "SendInput {tab}{Raw}{{{month}}}\n"+
@@ -82,10 +82,13 @@
           "SendInput {tab}{Raw}\n";
         if (view.type == "JOUR") {
           document.forms.daform.ws.value += Mustache.to_html(jtemplate, view);
+          document.forms.daform.ws.focus();
         } else if (view.type == "BOOK") {
           document.forms.daform.ws.value += Mustache.to_html(btemplate, view);
+          document.forms.daform.ws.focus();
         } else {
           document.forms.daform.ws.value += "UNRECOGNIZED RECORD TYPE";
+          document.forms.daform.ws.focus();
         }
       }
   %body
@@ -95,4 +98,6 @@
       %br
       %br
       %textarea{:name=>'ws', :cols=>'80',:rows=>'30',:wrap=>'off'}
+    :javascript
+      document.forms.daform.ws.focus();
 
