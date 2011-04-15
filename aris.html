@@ -5,6 +5,11 @@
     <script src='https://github.com/janl/mustache.js/raw/master/mustache.js' type='text/javascript'></script>
     <script type='text/javascript'>
       //<![CDATA[
+        // a string helper
+        function trim(stringToTrim) {
+          return stringToTrim.replace(/^\s+|\s+$/g,"");
+        }
+        
         function convert() {
           var view = [];
           view.ymd = "///";
@@ -15,27 +20,27 @@
             var label = mysplit[i].substring(0,2);
             var field = mysplit[i].substring(6);
             switch(label) {
-              case  "TY": view.type = field; break;
-              case "A1": if (view.auth) { break; } else { view.auth = field; } break;
-              case "AU": if (view.auth) { break; } else { view.auth = field; } break;
-              case "T1": view.title = field; break;
-              case "TI": view.title = field; break;
-              case "JF": view.journal = field; break;
-              case "JO": if (view.journal) { break; } else { view.journal = field; } break;
-              case "SP": view.sp = field; break;
-              case "EP": view.ep = field; break;
-              case "VL": view.vl = field; break;
-              case "IS": view.is = field; break;
-              case "DO": view.doi = field; break;
-              case "SN": view.sn = field; break;
-              case "UR": view.url = field; break;
-              case "ID": view.oclc = field; break;
-              case "DB": view.db = field; break;
-              case "PB": view.pb = field; break;
-              case "CY": view.city = field; break;
-              case "Y1": view.ymd = field.replace(/-/g,"/"); break;
-              case "YR": view.ymd = field.replace(/-/g,"/"); break;
-              case "PY": view.ymd = field.replace(/-/g,"/"); break;
+              case  "TY": view.type = field.trim(); break;
+              case "A1": if (view.auth) { break; } else { view.auth = field.trim(); } break;
+              case "AU": if (view.auth) { break; } else { view.auth = field.trim(); } break;
+              case "T1": view.title = field.trim(); break;
+              case "TI": view.title = field.trim(); break;
+              case "JF": view.journal = field.trim(); break;
+              case "JO": if (view.journal) { break; } else { view.journal = field.trim(); } break;
+              case "SP": view.sp = field.trim(); break;
+              case "EP": view.ep = field.trim(); break;
+              case "VL": view.vl = field.trim(); break;
+              case "IS": view.is = field.trim(); break;
+              case "DO": view.doi = field.trim(); break;
+              case "SN": view.sn = field.trim(); break;
+              case "UR": view.url = field.trim(); break;
+              case "ID": view.oclc = field.trim(); break;
+              case "DB": view.db = field.trim(); break;
+              case "PB": view.pb = field.trim(); break;
+              case "CY": view.city = field.trim(); break;
+              case "Y1": view.ymd = field.trim().replace(/-/g,"/"); break;
+              case "YR": view.ymd = field.trim().replace(/-/g,"/"); break;
+              case "PY": view.ymd = field.trim().replace(/-/g,"/"); break;
             }
           }
           var ymdsplit = [];
