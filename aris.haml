@@ -86,9 +86,9 @@
           "SendInput {tab 2}{Raw}{{{oclc}}}\n"+
           "SendInput {tab}{Raw}\n";
         if (view.type == "JOUR") {
-          alert(Mustache.to_html(jtemplate, view));
-          //document.forms.daform.ws.value = Mustache.to_html(jtemplate, view);
-          //document.forms.daform.ws.focus();
+          //alert(Mustache.to_html(jtemplate, view));
+          document.forms.daform.ws.value = Mustache.to_html(jtemplate, view);
+          document.forms.daform.ws.focus();
         } else if (view.type == "BOOK") {
           document.forms.daform.ws.value = Mustache.to_html(btemplate, view);
           document.forms.daform.ws.focus();
